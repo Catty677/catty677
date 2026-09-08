@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed Cherif — Materials and Mechanical Engineer</title>
+<meta name="description" content="Portfolio of mechanical engineering and R&D work.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%231B3A63' stroke-width='7' stroke-linecap='round'%3E%3Ccircle cx='60' cy='58' r='44'/%3E%3Cellipse cx='48' cy='58' rx='24' ry='44' transform='rotate(-6 48 58)'/%3E%3C/g%3E%3Cpath d='M22,100 Q71.4,66.4 100,14 Q50.6,47.6 22,100 Z' fill='%231B3A63'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     TOKENS — edit colors, fonts, and spacing here in one place
+     ============================================================ */
+  :root{
+    --bg:         #FFFFFF;   /* page background */
+    --panel:      #F6F7F8;   /* raised surface */
+    --panel-2:    #EEF1F4;   /* hover / active surface */
+    --line:       #E1E5EA;   /* hairline borders */
+    --text:       #262B30;   /* primary text — dark grey */
+    --text-dim:   #4B535B;   /* secondary text */
+    --text-faint: #6B7480;   /* tertiary / metadata text */
+    --accent:     #1B3A63;   /* primary accent — dark blue */
+    --accent-2:   #3F6690;   /* secondary / lighter blue */
+
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+
+    --radius: 3px;
+    --content-width: 920px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *, *::before, *::after{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3{ margin: 0; font-weight: 600; letter-spacing: -0.01em; }
+  p{ margin: 0; }
+  a{ color: inherit; }
+
+  .visually-hidden{
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
+  }
+
+  .skip-link{
+    position: absolute; top: -48px; left: 12px;
+    background: var(--accent); color: #fff;
+    padding: 10px 16px; border-radius: var(--radius);
+    font-family: var(--mono); font-size: 0.85rem;
+    z-index: 100; transition: top 0.15s ease;
+  }
+  .skip-link:focus{ top: 12px; }
+
+  :focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .wrap{
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ============================================================
+     HEADER / NAV
+     ============================================================ */
+  .site-header{
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header .wrap{
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 16px; padding-bottom: 16px;
+    max-width: 1040px;
+  }
+  .wordmark{
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: var(--text);
+    display: flex; align-items: center; gap: 9px;
+  }
+  .wordmark svg{ width: 24px; height: 24px; flex-shrink: 0; }
+  .site-nav{ display: flex; gap: 28px; }
+  .site-nav a{
+    font-size: 0.9rem; text-decoration: none; color: var(--text-dim);
+    transition: color 0.15s ease;
+  }
+  .site-nav a:hover{ color: var(--accent); }
+
+  @media (max-width: 640px){
+    .site-nav{ gap: 16px; }
+    .site-nav a{ font-size: 0.8rem; }
+  }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero{
+    position: relative;
+    overflow: hidden;
+    padding: 88px 0 56px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero__scan{
+    position: absolute; left: 0; right: 0; top: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.75;
+    animation: scan 1.6s cubic-bezier(0.2, 0.6, 0.2, 1) 0.2s 1 both;
+  }
+  @keyframes scan{
+    0%{ top: 0; opacity: 0; }
+    10%{ opacity: 1; }
+    100%{ top: 100%; opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero__scan{ display: none; }
+  }
+
+  .hero__role{
+    font-size: 0.95rem;
+    color: var(--accent);
+    font-family: var(--mono);
+    margin-bottom: 18px;
+  }
+  .hero h1{
+    font-size: clamp(2.4rem, 6vw, 3.4rem);
+    line-height: 1.05;
+    margin-bottom: 14px;
+  }
+  .hero__lede{
+    max-width: 60ch;
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+  }
+  .hero__cta{ display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+  .btn{
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 11px 20px;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+  }
+  .btn--primary{ background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn--primary:hover{ background: var(--accent-2); border-color: var(--accent-2); }
+  .btn--ghost{ color: var(--text); }
+  .btn--ghost:hover{ border-color: var(--accent); color: var(--accent); }
+
+  .readout{
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--text-faint);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 0;
+    display: flex; flex-wrap: wrap; gap: 6px 0;
+  }
+  .readout span:not(:last-child)::after{
+    content: "/";
+    color: var(--text-faint);
+    opacity: 0.5;
+    margin: 0 12px;
+  }
+
+  /* ============================================================
+     SECTION SCAFFOLDING
+     ============================================================ */
+  section{ padding: 72px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type{ border-bottom: none; }
+  .section__head{ margin-bottom: 40px; max-width: 62ch; }
+  .section__head h2{ font-size: 1.7rem; margin-bottom: 10px; }
+  .section__head p{ color: var(--text-dim); font-size: 1rem; }
+
+  /* ============================================================
+     CAPABILITIES
+     ============================================================ */
+  .skills__grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  @media (max-width: 720px){
+    .skills__grid{ grid-template-columns: 1fr; }
+  }
+  .skill{
+    background: var(--panel);
+    padding: 26px 28px;
+    transition: background 0.15s ease;
+  }
+  .skill:hover{ background: var(--panel-2); }
+  .skill h3{ font-size: 1.05rem; margin-bottom: 8px; }
+  .skill p{ color: var(--text-dim); font-size: 0.92rem; margin-bottom: 14px; }
+  .skill ul{ margin: 0; padding: 0; list-style: none; }
+  .skill li{
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text-faint);
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .skill li::before{
+    content: "";
+    position: absolute; left: 0; top: 0.55em;
+    width: 6px; height: 1px;
+    background: var(--accent-2);
+  }
+
+  /* ============================================================
+     FOCUS AREAS
+     ============================================================ */
+  .focus__grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 720px){
+    .focus__grid{ grid-template-columns: 1fr; }
+  }
+  .focus-card{
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    background: var(--panel);
+    transition: border-color 0.15s ease;
+  }
+  .focus-card:hover{ border-color: var(--accent-2); }
+  .focus-card__tag{
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent-2);
+    margin-bottom: 12px;
+  }
+  .focus-card__tag::before{ content: "[ "; color: var(--text-faint); }
+  .focus-card__tag::after{ content: " ]"; color: var(--text-faint); }
+  .focus-card h3{ font-size: 1.05rem; margin-bottom: 10px; }
+  .focus-card p{ color: var(--text-dim); font-size: 0.92rem; }
+
+  /* ============================================================
+     WHITE PAPERS
+     ============================================================ */
+  .papers__list{ list-style: none; margin: 0; padding: 0; }
+  .paper{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 24px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+    align-items: start;
+  }
+  .paper:last-child{ padding-bottom: 0; }
+  .paper__title{ font-size: 1.05rem; font-weight: 600; }
+  .paper__meta{
+    grid-column: 1 / -1;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-faint);
+  }
+  .paper__summary{
+    grid-column: 1 / -1;
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    max-width: 68ch;
+  }
+  .paper__link{
+    justify-self: start;
+    align-self: start;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--accent-2);
+    border-radius: var(--radius);
+    padding: 7px 14px;
+    white-space: nowrap;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .paper__link:hover{ background: var(--accent); color: #fff; border-color: var(--accent); }
+  @media (max-width: 560px){
+    .paper{ grid-template-columns: 1fr; }
+    .paper__link{ margin-top: 4px; }
+  }
+
+  .papers__empty{
+    padding: 32px 0;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    border-top: 1px solid var(--line);
+  }
+  .papers__empty code{
+    font-family: var(--mono);
+    background: var(--panel-2);
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-size: 0.85em;
+  }
+
+  /* ============================================================
+     CONTACT / FOOTER
+     ============================================================ */
+  .contact__grid{ display: flex; flex-wrap: wrap; gap: 32px 48px; margin-top: 24px; }
+  .contact__item{ display: flex; flex-direction: column; gap: 4px; }
+  .contact__item span{ font-family: var(--mono); font-size: 0.72rem; color: var(--text-faint); }
+  .contact__item a{ text-decoration: none; color: var(--text); font-size: 1rem; }
+  .contact__item a:hover{ color: var(--accent); }
+
+  .site-footer{
+    padding: 32px 0 48px;
+    color: var(--text-faint);
+    font-size: 0.82rem;
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="#top">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g fill="none" stroke="#1B3A63" stroke-width="7" stroke-linecap="round">
+          <circle cx="60" cy="58" r="44"/>
+          <ellipse cx="48" cy="58" rx="24" ry="44" transform="rotate(-6 48 58)"/>
+        </g>
+        <path d="M22,100 Q71.4,66.4 100,14 Q50.6,47.6 22,100 Z" fill="#1B3A63"/>
+        <path d="M46,96 Q85.8,65.5 114,24 Q74.2,54.5 46,96 Z" fill="#1B3A63" opacity="0.5"/>
+        <path d="M80,98 Q96,90 110,97" stroke="#1B3A63" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.55"/>
+      </svg>
+      MOHAMED CHERIF
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#skills">Capabilities</a>
+      <a href="#focus">Focus Areas</a>
+      <a href="#papers">White Papers</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================================================
+       HERO — edit name, role, and the readout line below
+       ============================================================ -->
+  <section class="hero" id="top">
+    <div class="hero__scan" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="hero__role">Materials & Mechanical Engineer</p>
+      <h1>Mohamed Cherif</h1>
+      <p class="hero__lede">
+        I am a materials engineer focused on bridging hardware design and advanced manufacturing. 
+	I use CAD, multiphysics simulations, and optical engineering to design and optimize products for various applications.
+      </p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#papers">White Papers</a>
+        <a class="btn btn--ghost" href="#focus">Focus Areas</a>
+      </div>
+      <div class="readout" aria-hidden="true">
+        <span><b>SolidWorks : CAD, FEA, CFD</span><span>COMSOL: Chemical Chenetics Simulations, FEA, CFD</span><span>ANSYS: CFD, HFSS, Z-Max</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CAPABILITIES — edit skill blocks in the .skill articles below
+       ============================================================ -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Capabilities</h2>
+        <p>Core areas spanning materials & mechanical design, optical designs, process development, and materials characterization.</p>
+      </div>
+      <div class="skills__grid">
+
+        <article class="skill">
+          <h3>CAD &amp; and Drawings</h3>
+          <p>Modeling devices, tooling, and fixturing with prescision to meet set specifications.</p>
+          <ul>
+            <li>Utilized SolidWorks for the 3D modeling of complex mechanical components and assemblies</li>
+            <li>Drafted detailed drawings with precise Geometric Dimensioning and Tolerancing (GD&T) callouts to ensure strict adherence to manufacturing specs</li>
+            <li>Designing specialized hardware, including thermally stable CNC-ready enclosures and air-free transport containers, for sensitive environments</li>
+            <li>Applying Design for Manufacturing (DFM) principles and reverse-engineering techniques to optimize component cost and mechanical performance</li>
+          </ul>
+        </article>
+
+        <article class="skill">
+          <h3>Simulation Expertise</h3>
+          <p>Developed simulations for devices, CVD, and mechanical components.</p>
+          <ul>
+            <li>Utilize finite element analysis (FEA) to validate mechanical integrity and prevent failure based on applicable conditions</li>
+            <li>Simulated chemical vapor deposition (CVD) using COMSOL Multiphysics (Plasma, Heat Transfer, and Chemical Species Transport modules) </li>
+            <li>Utilize computational fluid dynamics (CFD) simulations to optimize fluid flow, mass transport, and thermal dissipation</li>
+            <li>Conducted high-frequency electromagnetic and thermal failure analysis using ANSYS HFSS</li>
+          </ul>
+        </article>
+
+        <article class="skill">
+          <h3>Metrology &amp; Materials Characterization</h3>
+          <p>Analyzing structural composition, impurity retention, and device performance for various applications.</p>
+          <ul>
+            <li>SIMS and Raman spectroscopy for the analysis of doping uniformity</li>
+            <li>SEM, TEM, EDS, XPS, XRF analysis for structural &amp; chemical charecterization</li>
+            <li>UV-Vis and ellipsometry for measuring film thickness, absorbance, and optical constants</li>
+            <li>DSC and tensile/compressive testing to evaluate thermal stability and mechanical integrity</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOCUS AREAS — edit project panels below
+       ============================================================ -->
+  <section id="focus">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Focus Areas</h2>
+        <p>Selected threads of work — control systems, methodology, simulation, and analysis.</p>
+      </div>
+      <div class="focus__grid">
+
+        <article class="focus-card">
+          <span class="focus-card__tag">Control System</span>
+          <h3>TDL Dual-Chuck Motion Control</h3>
+          <p>ACSPL+ programming for a dual-chuck laser and machining platform — coordinate capture from confocal touch routines, quadratic depth-targeting correction, and automated layer-target generation.</p>
+        </article>
+
+        <article class="focus-card">
+          <span class="focus-card__tag">Methodology</span>
+          <h3>Stress-Based Diamond Splitting</h3>
+          <p>A separation approach built around controlled lateral crack-tip coalescence along {100} planes, in contrast to uncontrolled {111} cleavage — benchmarked conceptually against Infineon's Cold Split process for SiC, with comparative diagrams covering ultrasonic, UV-ozone, and molten-salt routes.</p>
+        </article>
+
+        <article class="focus-card">
+          <span class="focus-card__tag">Structural Simulation</span>
+          <h3>Graphite–Diamond Eigenfrequency Study</h3>
+          <p>COMSOL eigenfrequency modeling of a diamond–graphite–diamond sandwich (250 / 75 / 250 µm) to test whether graphite resonance can generate enough shear to split diamond plates, using a full 6×6 anisotropic stiffness model for graphite.</p>
+        </article>
+
+        <article class="focus-card">
+          <span class="focus-card__tag">Experiment</span>
+          <h3>Arrhenius Etching Kinetics</h3>
+          <p>A 3×3 factorial study across temperature and time to extract etching activation energy, paired with roughness tracking (Sa, Sz) to connect kinetics to surface outcome.</p>
+        </article>
+
+        <article class="focus-card">
+          <span class="focus-card__tag">Analysis</span>
+          <h3>Surface Treatment &amp; Termination Survey</h3>
+          <p>ANOVA comparison across surface-treatment process groups (AB, MS, UV-Ozone, WVE POR), alongside a DFT literature review comparing hydrogen, oxygen, and sulfur terminations on diamond (100)/(001) surfaces.</p>
+        </article>
+
+        <article class="focus-card">
+          <span class="focus-card__tag">Software</span>
+          <h3>Laser Recipe Templating Engine</h3>
+          <p>Jinja2 templates that generate JSON process recipes, with quadratic depth-correction for damage-layer targeting and guard conditions for minimum slab thickness and layer ordering.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHITE PAPERS — this list renders from the `papers` array
+       in the script at the bottom of this file. To add a paper:
+         1. Drop the PDF into the /papers folder next to this file.
+         2. Add a new entry to the `papers` array with the exact
+            filename.
+       ============================================================ -->
+  <section id="papers">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>White Papers</h2>
+        <p>Write-ups and technical notes, available to read as PDFs.</p>
+      </div>
+      <ul class="papers__list" id="papers-list"></ul>
+      <p class="papers__empty" id="papers-empty" hidden>
+        Nothing published yet. Add entries to the <code>papers</code> array near
+        the bottom of index.html, and place the matching PDF files in
+        <code>/papers</code>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT — replace the placeholder links below
+       ============================================================ -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Contact</h2>
+        <p>Feel free to contact me about the work above, collaborations, or roles.</p>
+      </div>
+      <div class="contact__grid">
+        <div class="contact__item">
+          <span>Email</span>
+          <a href="mailto:emincherif@gmail.com">emincherif@gmail.com</a>
+        </div>
+        <div class="contact__item">
+          <span>LinkedIn</span>
+          <a href="https://www.linkedin.com/in/mohamed-cherif-/" target="_blank" rel="noopener">https://www.linkedin.com/in/mohamed-cherif-/</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© <span id="year"></span> Mohamed Cherif. A lifelong learner excited to dive into the next complex project.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ============================================================
+     PAPERS DATA — add one object per white paper.
+     - title:   the paper's title
+     - summary: one or two sentence abstract
+     - tag:     a short category label
+     - date:    year or date string
+     - file:    path to the PDF, relative to index.html
+                (put the actual PDF in the /papers folder)
+     ============================================================ */
+  const papers = [
+    {
+      title: "Example White Paper — replace or delete this entry",
+      summary: "This is a placeholder so you can see the exact format. Copy this object, edit every field, and point \"file\" at a PDF you've placed in the /papers folder.",
+      tag: "Example",
+      date: "2026",
+      file: "papers/example.pdf"
+    }
+  ];
+
+  function renderPapers(){
+    const list = document.getElementById('papers-list');
+    const empty = document.getElementById('papers-empty');
+
+    if(!papers.length){
+      empty.hidden = false;
+      return;
+    }
+
+    papers.forEach(p => {
+      const li = document.createElement('li');
+      li.className = 'paper';
+
+      const title = document.createElement('p');
+      title.className = 'paper__title';
+      title.textContent = p.title;
+
+      const link = document.createElement('a');
+      link.className = 'paper__link';
+      link.href = p.file;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.textContent = 'View PDF';
+
+      const meta = document.createElement('p');
+      meta.className = 'paper__meta';
+      meta.textContent = [p.tag, p.date].filter(Boolean).join('  /  ');
+
+      const summary = document.createElement('p');
+      summary.className = 'paper__summary';
+      summary.textContent = p.summary;
+
+      li.appendChild(title);
+      li.appendChild(link);
+      li.appendChild(meta);
+      li.appendChild(summary);
+      list.appendChild(li);
+    });
+  }
+
+  renderPapers();
+</script>
+
+</body>
+</html>
