@@ -558,10 +558,11 @@
      ============================================================ */
   const papers = [
     {
-      title: "Packaging a 110 GHz Mach-Zehnder Modulator",
+      title: "Packaging a 200 GHz Mach-Zehnder Modulator",
       summary: "Designing and simulating the millimeter-wave electrode path that carries a 110 GHz Mach-Zehnder modulator's bandwidth from bare die to connectorized package, in Ansys HFSS and Keysight EMPro, through to built hardware.",
       tag: "Ansys HFSS / Keysight EMPro / Photonics",
-      file: "papers/MZ_Modulator.pdf"
+      file: "MZ_Modulator/",
+      linkText: "Read paper"
     }
   ];
 
@@ -587,7 +588,7 @@
       link.href = p.file;
       link.target = '_blank';
       link.rel = 'noopener';
-      link.textContent = 'View PDF';
+      link.textContent = p.linkText || 'View PDF';
 
       const meta = document.createElement('p');
       meta.className = 'paper__meta';
